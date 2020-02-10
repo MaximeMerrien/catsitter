@@ -1,1 +1,37 @@
-<h1>Bienvenue les p'tits loups !</h1>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-4"></div>
+        <div class="col-4">
+            <h1>Bienvenue sur CatSitter !</h1>
+            <p>
+                Postez votre première annonce dès maintenant...
+                <button id="postAnnonce" class="btn btn-secondary">Poster une annonce</button>
+            </p>
+            <p>
+                Ou consultez les dernières annonces disponibles.
+            </p>
+            <% if (files && files.length > 0) { %>
+                <% files.forEach( imgName => { %>
+                    <img src="http://localhost:3000/images/<%= imgName %>" alt="<%= imgName %>" style="height: 150px; width: 150px;" />
+                <% }) %>
+            <% } %>
+
+            <% if (annonces && annonces.length > 0) { %>
+                <% annonces.forEach( annonce => { %>
+                    <div>
+                        Nom: <%= annonce.nom %><br />
+                        Nombre de chats: <%= annonce.nbChats %><br />
+                        Date de début: <%= moment(annonce.dateDebut).format("DD-MM-YYYY HH:mm") %><br />
+                        Date de fin: <%= moment(annonce.dateFin).format("DD-MM-YYYY HH:mm") %><br />
+                    </div>
+                <% }) %>
+            <% } %>
+        </div>
+        <div class="col-4"></div>
+</div>
+
+<script type="text/javascript">
+    document.getElementById("postAnnonce").onclick = function () {
+        location.href = "/posterAnnonce";
+    };
+</script>

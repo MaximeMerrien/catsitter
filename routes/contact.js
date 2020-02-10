@@ -9,8 +9,8 @@ const router = express.Router();
 
 // Data
 const coords = {
-    address: "1 Avenue Alphonse Legault, 35170 Bruz",
-    tel: "01-02-03-04-05",
+    address: "43 rue Lenotre, 35200 Rennes",
+    tel: "02.01.03.04.05",
     email: "contact@catsitter.com"
 };
 

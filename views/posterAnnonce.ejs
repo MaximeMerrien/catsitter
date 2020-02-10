@@ -1,0 +1,114 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-4"></div>
+        <div class="col-4">
+            <h2 id="titleAnnonce">Votre annonce</h2>
+            <form action="/posterAnnonce" enctype="multipart/form-data" method="POST">
+                <div class="form-group">
+                    <label for="subject">Nom - Prénom</label>
+                    <input
+                        type="text"
+                        name="nom"
+                        id="nom"
+                        class="form-control"
+                        required
+                    />
+                </div>
+                <div class="form-group">
+                    <label for="nbChats">Nombre de chats</label>
+                    <input
+                        type="text"
+                        name="nbChats"
+                        id="nbChats"
+                        class="form-control"
+                        required
+                    />
+                </div>
+                <div class="form-group">
+                    <label for="photosChats">Photo de votre chat: </label>
+                    <input type="file"
+                        id="photosChats" name="photosChats"
+                        accept="image/png, image/jpeg, image/jpg"
+                        required
+                    />
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <label for="dateDebut">Du </label>
+                        <input
+                            type="date"
+                            name="dateDebut"
+                            id="dateDebut"
+                            class="form-control"
+                            required
+                        />
+                    </div>
+                    <div class="col">
+                        <label for="tempsDebut"> à </label>
+                        <input
+                            type="time"
+                            name="tempsDebut"
+                            id="tempsDebut"
+                            min="06:00"
+                            max="23:00"
+                            class="form-control"
+                            required
+                        />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <label for="dateFin">au </label>
+                        <input
+                            type="date"
+                            name="dateFin"
+                            id="dateFin"
+                            class="form-control"
+                            required
+                        />
+                    </div>
+                    <div class="col">
+                        <label for="tempsFin"> à </label>
+                        <input
+                            type="time"
+                            name="tempsFin"
+                            id="tempsFin"
+                            min="06:00"
+                            max="23:00"
+                            class="form-control"
+                            required
+                        />
+                    </div>
+                </div>
+                <input type="submit" value="Envoyer" class="btn btn-info btn-block" />
+            </form>
+        </div>
+        <div class="col-4"></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    // Date
+    Date.prototype.toDateInputValue = (function() {
+        var local = new Date(this);
+        local.setMinutes(this.getMinutes() - this.getTimezoneOffset());
+        return local.toJSON().slice(0,10);
+    });
+    document.getElementById("dateDebut").value = new Date().toDateInputValue();
+    document.getElementById("dateFin").value = new Date().toDateInputValue();
+
+    // Heure
+    Date.prototype.toTimeInputValueDebut = (function() {
+        var local = new Date(this);
+        local.setMinutes(this.getMinutes() - this.getTimezoneOffset());
+        return Number(local.toJSON().slice(11,13))+1+":00";
+    });
+    document.getElementById("tempsDebut").value = new Date().toTimeInputValueDebut();
+
+    Date.prototype.toTimeInputValueFin = (function() {
+        var local = new Date(this);
+        local.setMinutes(this.getMinutes() - this.getTimezoneOffset());
+        return Number(local.toJSON().slice(11,13))+2+":00";
+    });
+    document.getElementById("tempsFin").value = new Date().toTimeInputValueFin();
+</script>
