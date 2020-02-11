@@ -9,3 +9,19 @@
 .btn {
     margin-top: 1rem;
 }
+
+.card {
+    width: 20rem;
+    margin: 0 1rem;
+    padding: 1rem;
+}
+
+.homeImage {
+    height: 14rem;
+    width: 14rem;
+    margin: 0 2rem;
+}
+
+.reponseAnnonce {
+    margin-top: 0;
+}
