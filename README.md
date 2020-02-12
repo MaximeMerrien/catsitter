@@ -12,7 +12,7 @@ En option :
 - Une cartographie
 
 Pour installer le projet en local :
-- Installer MongoDB
+- Installer MongoDB, créer une BDD appelée catsitter et créer une collection appelée annonces dans cette BDD
 - Git clone du projet sinon download le .zip
 - Ouvrir le projet avec un éditeur
 - Créer le fichier .env en local à la racine du projet et écrire dedans :
