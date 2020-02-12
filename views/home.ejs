@@ -14,10 +14,10 @@
         <div class="col-4"></div>
     </div>
     <div class="row">
-        <% if ((files && files.length > 0) && (annonces && annonces.length > 0)) { %>
+        <% if (annonces && annonces.length > 0) { %>
             <% for (let i = 0; i < annonces.length; i++) { %>
                 <div class="card">
-                    <img src="http://localhost:3000/images/<%= files[i] %>" alt="<%= files[i] %>" class="homeImage" />
+                    <img src="http://localhost:3000/images/<%= annonces[i].nomImage %>" alt="<%= annonces[i].nomImage %>" class="homeImage" />
                     <div class="card-body">
                         <span class="headers">Nom :</span> <%= annonces[i].nom %><br />
                         <span class="headers">Nombre de chats :</span> <%= annonces[i].nbChats %><br />
@@ -25,7 +25,7 @@
                         <span class="headers">Date de début :</span> <%= moment(annonces[i].dateDebut).format("DD-MM-YYYY HH:mm") %><br />
                         <span class="headers">Date de fin :</span> <%= moment(annonces[i].dateFin).format("DD-MM-YYYY HH:mm") %><br />
                     </div>
-                    <a href="/reponseAnnonce" class="btn btn-primary reponseAnnonce">Répondre à l'annonce</a>
+                    <a href="/reponseAnnonce/<%= annonces[i].id %>" class="btn btn-primary reponseAnnonce">Répondre à l'annonce</a>
                 </div>
             <% } %>
         <% } %>

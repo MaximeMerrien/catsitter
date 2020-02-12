@@ -2,9 +2,9 @@
     <div class="row">
         <div class="col-4"></div>
         <div class="col-4">
-            <form id="formReponseAnnonce" action="/reponseAnnonce" method="POST">
+            <form id="formReponseAnnonce" method="POST">
                 <div class="form-group">
-                    <label for="subject">Prénom - Nom</label>
+                    <label for="nom">Prénom - Nom</label>
                     <input
                         type="text"
                         name="nom"
@@ -14,7 +14,7 @@
                     />
                 </div>
                 <fieldset>
-                    <legend>Lieu</legend>
+                    <label for="annonceur">Lieu</label>
                     <div>
                         <input
                             type="checkbox"
@@ -32,22 +32,29 @@
                         <label for="catsitter">Chez le catsitter</label>
                     </div>
                 </fieldset>
-                <div class="form-group">
-                    <label for="prix">Prix</label>
+                <label for="prix">Prix</label>
+                <div class="input-group mb-2">
                     <input
                         type="number"
                         id="prix"
                         name="prix"
                         class="form-control"
-                        required />
+                        aria-label="Prix" />
+                    <div class="input-group-append">
+                        <span class="input-group-text">€</span>
+                    </div>
                 </div>
                 <input type="button" id="reponseAnnonce" value="Répondre" class="btn btn-info btn-block" />
             </form>
 
-            <% if (typeof(nom) !== "undefined" && typeof(lieu) !== "undefined" && typeof(prix) !== "undefined") { %>
-                <a href="mailto:contact@catsitter.com?subject=Gardiennage chats&body=Nom : <%= nom %>%0D%0ALieu : <%= lieu %>%0D%0APrix : <%= prix %>">
-                    contact@catsitter.com
-                </a>
+            <% if (typeof(nom) !== "undefined" && typeof(lieu) !== "undefined" && typeof(prix) !== "undefined" && typeof(annonce[0]) !== "undefined") { %>
+                <div id="lienReponse">
+                    Cliquez
+                    <a href="mailto:<%= annonce[0].email %>?subject=Gardiennage chats&body=Nom : <%= nom %>%0D%0ALieu : <%= lieu %>%0D%0APrix : <%= prix %>">
+                        ici
+                    </a>
+                    pour envoyer votre réponse !
+                </div>
             <% } %>
         </div>
         <div class="col-4"></div>
@@ -55,20 +62,20 @@
 </div>
 
 <script type="text/javascript">
-document.getElementById('reponseAnnonce').addEventListener('click', function() {
-    let checked = 0;
-    let checkboxs = document.getElementsByClassName('lieu');
+    document.getElementById('reponseAnnonce').addEventListener('click', function() {
+        let checked = 0;
+        let checkboxs = document.getElementsByClassName('lieu');
 
-    for(let i = 0; i < checkboxs.length; i++) {
-        checked = checked + checkboxs[i].checked;
-    }
-    console.log(checked);
+        for(let i = 0; i < checkboxs.length; i++) {
+            checked = checked + checkboxs[i].checked;
+        }
+        console.log(checked);
 
-    if(!checked) {
-        alert("Vous devez sélectionner au moins 1 valeur pour le champ 'Lieu'.");
-        return false;
-    } else {
-        document.getElementById('formReponseAnnonce').submit();
-    }
-});
+        if(!checked) {
+            alert("Vous devez sélectionner au moins 1 valeur pour le champ 'Lieu'.");
+            return false;
+        } else {
+            document.getElementById('formReponseAnnonce').submit();
+        }
+    });
 </script>

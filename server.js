@@ -18,7 +18,7 @@ app.set("layout", "layouts/layout");
 // Middlewares
 app.use(express.urlencoded({ extended: true }))
 .use(expressLayouts)
-.use(express.static("public"))
+.use(express.static(__dirname + "/public"))
 // Custom
 .use("/", indexRouter)
 .use("/contact", contactRouter)

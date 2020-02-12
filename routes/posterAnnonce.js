@@ -49,8 +49,11 @@ router.post("/", upload.single("photosChats"), (req, res) => {
     const annonce = new Annonce({
         nom: req.body.nom,
         nbChats: req.body.nbChats,
+        nomImage: req.file.filename,
+        lieu: req.body.lieu,
         dateDebut: req.body.dateDebut + ':' + req.body.tempsDebut,
-        dateFin: req.body.dateFin + ':' + req.body.tempsFin
+        dateFin: req.body.dateFin + ':' + req.body.tempsFin,
+        email: req.body.email
     });
 
     annonce.save((err, annonce) => {
