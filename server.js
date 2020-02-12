@@ -20,10 +20,12 @@ app.use(express.urlencoded({ extended: true }))
 .use(expressLayouts)
 .use(express.static(__dirname + "/public"))
 // Custom
-.use("/", indexRouter)
 .use("/contact", contactRouter)
 .use("/posterAnnonce", annonceRouter)
-.use("/reponseAnnonce", reponseAnnonceRouter);
+.use("/reponseAnnonce", reponseAnnonceRouter)
+// On met ça à la fin sinon le middleware est utilisé sur toutes les routes,
+// ce qui a pour effet de ne pas prendre en compte les middlewares ci-dessus
+.use("/", indexRouter);
 
 app.listen(PORT, () => {
     console.log(`Listening on port ${PORT}`);

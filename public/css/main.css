@@ -6,7 +6,7 @@
     text-align: center;
 }
 
-.btn {
+.btn, #lienReponse {
     margin-top: 1rem;
 }
 
@@ -28,8 +28,4 @@
 
 .headers {
     font-weight: bold;
-}
-
-#lienReponse {
-    margin-top: 1rem;
 }
