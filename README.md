@@ -13,7 +13,7 @@ En option :
 
 Pour installer le projet en local :
 - Installer MongoDB
-- git clone du projet sinon download le .zip
+- Git clone du projet sinon download le .zip
 - Ouvrir le projet avec un éditeur
 - Créer le fichier .env en local à la racine du projet et écrire dedans :
 <pre><code>MONGO_SRV=<i>chaine_de_connexion_mongo</i></code></pre>
