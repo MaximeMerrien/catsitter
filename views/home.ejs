@@ -5,10 +5,10 @@
             <h1>Bienvenue sur CatSitter !</h1>
             <p>
                 Postez votre première annonces dès maintenant...
-                <button id="postAnnonces" class="btn btn-secondary">Poster une annonce</button>
+                <a href="/posterAnnonce" class="btn btn-secondary">Poster une annonce</a>
             </p>
             <p>
-                Ou consultez les dernières annoncess disponibles.
+                Ou consultez les dernières annonces disponibles.
             </p>
         </div>
         <div class="col-4"></div>
@@ -19,20 +19,15 @@
                 <div class="card">
                     <img src="http://localhost:3000/images/<%= files[i] %>" alt="<%= files[i] %>" class="homeImage" />
                     <div class="card-body">
-                        Nom: <%= annonces[i].nom %><br />
-                        Nombre de chats: <%= annonces[i].nbChats %><br />
-                        Date de début: <%= moment(annonces[i].dateDebut).format("DD-MM-YYYY HH:mm") %><br />
-                        Date de fin: <%= moment(annonces[i].dateFin).format("DD-MM-YYYY HH:mm") %><br />
+                        <span class="headers">Nom :</span> <%= annonces[i].nom %><br />
+                        <span class="headers">Nombre de chats :</span> <%= annonces[i].nbChats %><br />
+                        <span class="headers">Lieu de recherche :</span> <%= annonces[i].lieu %><br />
+                        <span class="headers">Date de début :</span> <%= moment(annonces[i].dateDebut).format("DD-MM-YYYY HH:mm") %><br />
+                        <span class="headers">Date de fin :</span> <%= moment(annonces[i].dateFin).format("DD-MM-YYYY HH:mm") %><br />
                     </div>
-                    <a href="#" class="btn btn-primary reponseAnnonces">Répondre à l'annonces</a>
+                    <a href="/reponseAnnonce" class="btn btn-primary reponseAnnonce">Répondre à l'annonce</a>
                 </div>
             <% } %>
         <% } %>
     </div>
 </div>
-
-<script type="text/javascript">
-    document.getElementById("postAnnonces").onclick = function () {
-        location.href = "/posterAnnonce";
-    };
-</script>

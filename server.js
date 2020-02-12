@@ -4,6 +4,7 @@ const expressLayouts = require("express-ejs-layouts");
 const indexRouter = require("./routes/home");
 const annonceRouter = require("./routes/posterAnnonce");
 const contactRouter = require("./routes/contact");
+const reponseAnnonceRouter = require("./routes/reponseAnnonce");
 
 // Vars
 const app = express();
@@ -21,7 +22,8 @@ app.use(express.urlencoded({ extended: true }))
 // Custom
 .use("/", indexRouter)
 .use("/contact", contactRouter)
-.use("/posterAnnonce", annonceRouter);
+.use("/posterAnnonce", annonceRouter)
+.use("/reponseAnnonce", reponseAnnonceRouter);
 
 app.listen(PORT, () => {
     console.log(`Listening on port ${PORT}`);

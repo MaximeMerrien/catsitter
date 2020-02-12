@@ -1,0 +1,74 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-4"></div>
+        <div class="col-4">
+            <form id="formReponseAnnonce" action="/reponseAnnonce" method="POST">
+                <div class="form-group">
+                    <label for="subject">Prénom - Nom</label>
+                    <input
+                        type="text"
+                        name="nom"
+                        id="nom"
+                        class="form-control"
+                        required
+                    />
+                </div>
+                <fieldset>
+                    <legend>Lieu</legend>
+                    <div>
+                        <input
+                            type="checkbox"
+                            id="annonceur"
+                            name="annonceur"
+                            class="lieu" />
+                        <label for="annonceur">Chez l'annonceur</label>
+                    </div>
+                    <div>
+                        <input
+                            type="checkbox"
+                            id="catsitter"
+                            name="catsitter"
+                            class="lieu" />
+                        <label for="catsitter">Chez le catsitter</label>
+                    </div>
+                </fieldset>
+                <div class="form-group">
+                    <label for="prix">Prix</label>
+                    <input
+                        type="number"
+                        id="prix"
+                        name="prix"
+                        class="form-control"
+                        required />
+                </div>
+                <input type="button" id="reponseAnnonce" value="Répondre" class="btn btn-info btn-block" />
+            </form>
+
+            <% if (typeof(nom) !== "undefined" && typeof(lieu) !== "undefined" && typeof(prix) !== "undefined") { %>
+                <a href="mailto:contact@catsitter.com?subject=Gardiennage chats&body=Nom : <%= nom %>%0D%0ALieu : <%= lieu %>%0D%0APrix : <%= prix %>">
+                    contact@catsitter.com
+                </a>
+            <% } %>
+        </div>
+        <div class="col-4"></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+document.getElementById('reponseAnnonce').addEventListener('click', function() {
+    let checked = 0;
+    let checkboxs = document.getElementsByClassName('lieu');
+
+    for(let i = 0; i < checkboxs.length; i++) {
+        checked = checked + checkboxs[i].checked;
+    }
+    console.log(checked);
+
+    if(!checked) {
+        alert("Vous devez sélectionner au moins 1 valeur pour le champ 'Lieu'.");
+        return false;
+    } else {
+        document.getElementById('formReponseAnnonce').submit();
+    }
+});
+</script>
