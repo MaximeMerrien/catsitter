@@ -4,6 +4,7 @@ Application web de gardiennage pour chats
 L'application proposera dans sa première version deux fonctionnalités :
   - Poster une annonce
   - Répondre à une annonce via un envoi de mail
+  - Pagination sur la page d'accueil
   
 Une page d'accueil répertoriera les dernières annonces postées.<br />
 Une page de contact affichera les coordonnées de Catsitter, et permettra de laisser un message.
