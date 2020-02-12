@@ -9,4 +9,4 @@ Une page d'accueil répertoriera les dernières annonces postées.<br />
 Une page de contact affichera les coordonnées de catsitter, et permettra de laisser un message.
 
 En option : 
-- une cartographie
+- Une cartographie
