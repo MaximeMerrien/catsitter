@@ -6,7 +6,7 @@ L'application proposera dans sa première version deux fonctionnalités :
   - Répondre à une annonce via un envoi de mail
   
 Une page d'accueil répertoriera les dernières annonces postées.<br />
-Une page de contact affichera les coordonnées de catsitter, et permettra de laisser un message.
+Une page de contact affichera les coordonnées de Catsitter, et permettra de laisser un message.
 
 Pour installer le projet en local :
 - Installer MongoDB, créer une BDD appelée catsitter et créer une collection appelée annonces dans cette BDD
@@ -18,3 +18,12 @@ Pour installer le projet en local :
   - Faire un npm install afin d'installer tous les packages : <pre><code>npm install</code></pre>
   - Excécuter le script dev qui se trouve dans l'onglet NPM SCRIPTS
 - Dans un navigateur, ouvrir l'URL localhost:3000
+
+Captures :
+
+![img accueil](https://zupimages.net/up/20/07/ezua.png )
+![img accueil2](https://zupimages.net/up/20/07/etkj.png)
+![img poster annonce](https://zupimages.net/up/20/07/tpr0.png)
+![img reponse annonce](https://zupimages.net/up/20/07/67qa.png )
+![img contact](https://zupimages.net/up/20/07/8lyw.png )
+
