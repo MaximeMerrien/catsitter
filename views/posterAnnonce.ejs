@@ -2,6 +2,12 @@
     <div class="row">
         <div class="col-4"></div>
         <div class="col-4">
+            <% if (typeof(display) !== "undefined") { %>
+                <div id="annoncePostee" class="alert alert-success" role="alert">
+                    Votre annonce a bien été enregistrée !
+                </div>
+            <% } %>
+
             <h2 id="titleAnnonce">Votre annonce</h2>
             <form action="/posterAnnonce" enctype="multipart/form-data" method="POST">
                 <div class="form-group">
@@ -101,7 +107,8 @@
                         required
                     />
                 </div>
-                <input type="submit" value="Envoyer" class="btn btn-info btn-block" />
+                <input id="display" name="display" type="hidden" value="display" />
+                <input id="buttonSubmit" onclick="validateFields()" type="submit" value="Envoyer" class="btn btn-info btn-block" />
             </form>
         </div>
         <div class="col-4"></div>
@@ -132,4 +139,13 @@
         return Number(local.toJSON().slice(11,13))+2+":00";
     });
     document.getElementById("tempsFin").value = new Date().toTimeInputValueFin();
+
+    function validateFields() {
+        let inputs = document.getElementsByTagName('form')[0].getElementsByTagName('input');
+        for (let i = 0; i < inputs.length; i++) {
+            if (!inputs[i].value) {
+                return;
+            }
+        }
+    }
 </script>

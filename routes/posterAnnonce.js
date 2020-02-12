@@ -56,12 +56,14 @@ router.post("/", upload.single("photosChats"), (req, res) => {
         email: req.body.email
     });
 
+    const display = req.body.display;
+
     annonce.save((err, annonce) => {
         if (err) {
           console.error(err);
           return res.status(500).json({ message: "Failed to save annonce" });
         } else {
-            res.render("posterAnnonce", {});
+            res.render("posterAnnonce", { display });
         }
     });
 });
