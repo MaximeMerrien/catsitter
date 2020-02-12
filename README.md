@@ -8,9 +8,6 @@ L'application proposera dans sa première version deux fonctionnalités :
 Une page d'accueil répertoriera les dernières annonces postées.<br />
 Une page de contact affichera les coordonnées de catsitter, et permettra de laisser un message.
 
-En option : 
-- Une cartographie
-
 Pour installer le projet en local :
 - Installer MongoDB, créer une BDD appelée catsitter et créer une collection appelée annonces dans cette BDD
 - Git clone du projet sinon download le .zip
