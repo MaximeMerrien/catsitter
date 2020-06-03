@@ -1,11 +1,9 @@
 const express = require("express");
 const router = express.Router();
-require("dotenv").config();
 
-const connectDb = require("../utils/connectDb");
-const Annonce = require("../models/Annonces");
-
-const db = connectDb();
+const AWS = require("aws-sdk");
+const conf = require("../utils/config.js");
+AWS.config.update(conf.config);
 
 router.get("/:id", (req, res) => {
     res.render("reponseAnnonce", { });
@@ -32,19 +30,19 @@ router.post("/:id", (req, res) => {
     let idAnnonce = req.path;
     idAnnonce = idAnnonce.substring(1);
 
-    if (db) {
-        Annonce.find({ _id: idAnnonce})
-        .exec((err, annonce) => {
-            if (err) {
-                return res
-                    .status(500)
-                    .json({ message: "Could not retrieve annonces" });
-            }
-            res.render("reponseAnnonce", { nom, lieu, prix, annonce });
-        });
-    } else {
+    // if (db) {
+    //     Annonce.find({ _id: idAnnonce})
+    //     .exec((err, annonce) => {
+    //         if (err) {
+    //             return res
+    //                 .status(500)
+    //                 .json({ message: "Could not retrieve annonces" });
+    //         }
+    //         res.render("reponseAnnonce", { nom, lieu, prix, annonce });
+    //     });
+    // } else {
         res.render("reponseAnnonce", {});
-    }
+    // }
 });
 
 module.exports = router;

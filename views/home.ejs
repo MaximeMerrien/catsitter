@@ -17,7 +17,7 @@
         <% if (typeof(annonces) !== "undefined" && annonces.length > 0) { %>
             <% for (let i = 0; i < annonces.length; i++) { %>
                 <div class="card">
-                    <img src="http://localhost:3000/images/<%= annonces[i].nomImage %>" alt="<%= annonces[i].nomImage %>" class="homeImage" />
+                    <img src="<%= annonces[i].nomImage %>" alt="<%= annonces[i].nomImage %>" class="homeImage" />
                     <div class="card-body">
                         <span class="headers">Nom :</span> <%= annonces[i].nom %><br />
                         <span class="headers">Nombre de chats :</span> <%= annonces[i].nbChats %><br />

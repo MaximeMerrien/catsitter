@@ -1,67 +1,70 @@
 const express = require("express");
-const fs = require("fs");
-const multer = require("multer");
-const crypto = require("crypto");
 const path = require("path");
-require("dotenv").config();
+const fs = require("fs");
+
+const AWS = require("aws-sdk");
+const conf = require("../utils/config.js");
+AWS.config.update(conf.config);
+const bucketName = 'groupe1-2020';
 
 const router = express.Router();
-
-const connectDb = require("../utils/connectDb");
-const Annonce = require("../models/Annonces");
-
-connectDb();
-
-const allowedImageMimeTypes = [
-    "image/jpeg",
-    "image/jpg",
-    "image/png",
-    "image/gif"
-];
-
-let uploadedImageName = "";
-
-var storage = multer.diskStorage({
-    destination: "./public/images/",
-    filename: function(req, file, cb) {
-        crypto.pseudoRandomBytes(16, function(err, raw) {
-            if (err) return cb(err);
-            uploadedImageName = raw.toString("hex") + path.extname(file.originalname);
-            cb(null, uploadedImageName);
-        });
-    }
-});
-
-const upload = multer({
-    dest: "public/images",
-    limits: 10 * 1024 * 1024,
-    fileFilter: (req, file, cb) => {
-        cb(null, allowedImageMimeTypes.includes(file.mimetype));
-    },
-    storage: storage
-});
 
 router.get("/", (req, res) => {
     res.render("posterAnnonce",  {});
 });
 
-router.post("/", upload.single("photosChats"), (req, res) => {
-    const annonce = new Annonce({
-        nom: req.body.nom,
-        nbChats: req.body.nbChats,
-        nomImage: req.file.filename,
-        lieu: req.body.lieu,
-        dateDebut: req.body.dateDebut + ':' + req.body.tempsDebut,
-        dateFin: req.body.dateFin + ':' + req.body.tempsFin,
-        email: req.body.email
+router.post("/", (req, res) => {
+    var uploadImageParams = {
+        Bucket: bucketName,
+        Key: '',
+        Body: ''
+    };
+
+    var nomImage = req.file.filename;
+
+    var fileStream = fs.createReadStream(nomImage);
+    fileStream.on('error', function(err) {
+        return res.status(500).json({ message: "Erreur lors de la création du lecteur" });
+    });
+    uploadImageParams.Body = fileStream;
+    uploadImageParams.Key = path.basename(nomImage);
+
+    s3.upload(uploadImageParams, function (err, data) {
+        if (err) {
+            return res.status(500).json({ message: "Erreur lors de l'ajout de l'image" });
+        }
     });
 
-    const display = req.body.display;
+    var imagePath = "https://"+ bucketName +".s3.amazonaws.com/" + nomImage;
 
-    annonce.save((err, annonce) => {
+    var nom = req.body.nom;
+    var nbChats = req.body.nbChats;
+    var lieu = req.body.lieu;
+    var dateDebut = req.body.dateDebut + ':' + req.body.tempsDebut;
+    var dateFin = req.body.dateFin + ':' + req.body.tempsFin;
+    var email = req.body.email;
+    var display = req.body.display;
+
+    var docClient = new AWS.DynamoDB.DocumentClient();
+    var table = "catsitter";
+
+    var params = {
+        TableName:table,
+        Item:{
+            "id": Math.floor(Math.random() * Math.floor(500)).toString(),
+            "nom": nom,
+            "nbChats": nbChats,
+            "nomImage": imagePath,
+            "lieu": lieu,
+            "dateDebut": dateDebut,
+            "dateFin": dateFin,
+            "email": email
+        }
+    };
+
+    docClient.put(params, function(err, data) {
         if (err) {
-          console.error(err);
-          return res.status(500).json({ message: "Failed to save annonce" });
+            return res.status(500).json({ message: JSON.stringify(err, null, 2) });
         } else {
             res.render("posterAnnonce", { display });
         }
